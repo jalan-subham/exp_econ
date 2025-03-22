@@ -1,0 +1,28 @@
+{{ block title }}Results{{ endblock }}
+{{ block content }}
+    <p>
+        {{ if player.volunteer }}
+            You volunteered. As a result, your payoff is
+            <strong>{{ player.payoff }}</strong>.
+        {{ elif group.num_volunteers > 0 }}
+            You did not volunteer but someone did. As a result, your payoff is
+            <strong>{{ player.payoff }}</strong>.
+        {{ else }}
+            You did not volunteer and no one did. As a result, your payoff is
+            <strong>{{ player.payoff }}</strong>.
+        {{ endif }}
+    </p>
+
+    <p>Everyone who volunteerd: </p>
+    <ul>
+        {% for p in group.get_players %}
+            {% if p.volunteer %}
+                <li>{{ p.name }}</li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+    <p>{{ next_button }}</p>
+
+    <!-- {{ include_sibling 'instructions.html' }} -->
+
+{{ endblock }}
