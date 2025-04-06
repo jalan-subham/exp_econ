@@ -14,6 +14,12 @@ SESSION_CONFIGS = [
         app_sequence=['volunteer_dilemma_v2'],
         num_demo_participants=8,
     ),
+    dict(
+        name='vd_v3',
+        display_name="Modified version of Volunteer's Dilemma by AHRSS - v3",
+        app_sequence=['volunteer_dilemma_v3'],
+        num_demo_participants=4,
+    ),
 ]
 
 # if you set a property in SESSION_CONFIG_DEFAULTS, it will be inherited by all configs

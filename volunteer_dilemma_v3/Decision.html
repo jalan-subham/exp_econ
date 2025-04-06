@@ -1,0 +1,14 @@
+
+
+{{ block title }}Your Choice{{ endblock }}
+{{ block content }}
+
+    {{ formfields }}
+    <p>{{ next_button }}</p>
+
+    <!-- {{ include_sibling 'instructions.html' }} -->
+
+    Your current balance is <strong>{{ player.balance }}</strong>. <br>
+    Group's balance range is <strong>{{ group.min_balance }}</strong> to <strong>{{ group.max_balance }}</strong>. <br>
+{{ endblock }}
+

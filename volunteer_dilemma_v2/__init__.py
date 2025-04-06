@@ -7,6 +7,8 @@ Each player decides if to free ride or to volunteer from which all will
 benefit.
 See: Diekmann, A. (1985). Volunteer's dilemma. Journal of Conflict
 Resolution, 605-610.
+
+This is 3 rounds, no balances, name reveal, no min-max balance reveal, altruistic version.
 """
 
 
