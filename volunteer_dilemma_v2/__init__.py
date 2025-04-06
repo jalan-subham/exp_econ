@@ -11,14 +11,16 @@ Resolution, 605-610.
 
 
 class C(BaseConstants):
-    NAME_IN_URL = 'volunteer_dilemma_v1'
+    NAME_IN_URL = 'volunteer_dilemma_v'
     PLAYERS_PER_GROUP = 4
     NUM_ROUNDS = 1
     NUM_OTHER_PLAYERS = PLAYERS_PER_GROUP - 1
     # """Payoff for each player if at least one volunteers"""
     GENERAL_BENEFIT = cu(5)
     # """Cost incurred by volunteering player"""
-    VOLUNTEER_COST = cu(5)
+    VOLUNTEER_COST = cu(7)
+    # payoff if no one volunteers
+    NO_VOLUNTEER_PAYOFF = cu(-2)
 
 
 class Subsession(BaseSubsession):
@@ -45,11 +47,12 @@ def set_payoffs(group: Group):
     if group.num_volunteers > 0:
         baseline_amount = C.GENERAL_BENEFIT
     else:
-        baseline_amount = cu(0)
+        baseline_amount = C.NO_VOLUNTEER_PAYOFF
     for p in players:
         p.payoff = baseline_amount
         if p.volunteer:
             p.payoff -= C.VOLUNTEER_COST
+
 
 
 # PAGES
