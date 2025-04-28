@@ -10,6 +10,7 @@ class C(BaseConstants):
     GENERAL_BENEFIT = cu(10)
     VOLUNTEER_COST = cu(5)  # standard: cost < benefit
     NO_VOLUNTEER_PAYOFF = cu(-2)
+    NUM_ROUNDS = 1
 
 class Subsession(BaseSubsession):
     pass
