@@ -75,7 +75,9 @@ class Decision(Page):
     form_fields = ['volunteer']
     def vars_for_template(player):
         group_incomes = sorted([p.balance for p in player.group.get_players()])
-        return dict(group_incomes=[str(i) for i in group_incomes],)
+        return {
+            "group_incomes": ', '.join([str(x) for x in group_incomes]),
+        }
 
 class InitWaitPage(WaitPage):
     after_all_players_arrive = set_initial_min_max_balance
