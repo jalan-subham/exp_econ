@@ -1,0 +1,7 @@
+{% extends "global/Page.html" %}
+{% block content %}
+    <h3>Results</h3>
+    <p>Number of volunteers in your group: {{ group.num_volunteers }}</p>
+    <p>Your payoff this round: {{ player.payoff }}</p>
+    {{ next_button }}
+{% endblock %}

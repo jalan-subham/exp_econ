@@ -20,6 +20,38 @@ SESSION_CONFIGS = [
         app_sequence=['volunteer_dilemma_v3'],
         num_demo_participants=4,
     ),
+    dict(
+        name='volunteer_dilemma_v4',
+        display_name='Experimental Economics Experiment 1 (Altruism: ON, Income Reveal: ON)',
+        app_sequence=['volunteer_dilemma_v4'],
+        num_demo_participants=4,
+        altruism=True,
+        income_reveal=True,
+    ),
+    dict(
+        name='volunteer_dilemma_v5',
+        display_name='Experimental Economics Experiment 2 (Altruism: ON, Income Reveal: OFF)',
+        app_sequence=['volunteer_dilemma_v5'],
+        num_demo_participants=4,
+        altruism=True,
+        income_reveal=False,
+    ),
+    dict(
+        name='volunteer_dilemma_v6',
+        display_name='Experimental Economics Experiment 3 (Altruism: OFF, Income Reveal: ON)',
+        app_sequence=['volunteer_dilemma_v6'],
+        num_demo_participants=4,
+        altruism=False,
+        income_reveal=True,
+    ),
+    dict(
+        name='volunteer_dilemma_v7',
+        display_name='Experimental Economics Experiment 4 (Altruism: OFF, Income Reveal: OFF)',
+        app_sequence=['volunteer_dilemma_v7'],
+        num_demo_participants=4,
+        altruism=False,
+        income_reveal=False,
+    ),
 ]
 
 # if you set a property in SESSION_CONFIG_DEFAULTS, it will be inherited by all configs
