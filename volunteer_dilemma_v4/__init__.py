@@ -12,8 +12,8 @@ class C(BaseConstants):
     GENERAL_BENEFIT = cu(5)
     VOLUNTEER_COST = cu(7)  # altruism: cost = benefit
     NO_VOLUNTEER_PAYOFF = cu(-2)
-    BALANCE_LOW = 30
-    BALANCE_HIGH = 70 # random balances
+    BALANCE_LOW = 50
+    BALANCE_HIGH = 100 # random balances
     NUM_ROUNDS = 1
 
 class Subsession(BaseSubsession):
