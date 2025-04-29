@@ -4,12 +4,12 @@
     <p>Do you wish to volunteer? If at least one person volunteers, everyone benefits. If no one volunteers, all lose out.</p>
     <p>Group incomes: {{ group_incomes }}</p>
     <p>Your balance: {{ player.balance }}</p>
-    {{ formfields }}
-    {{ next_button }}
     <h4>Payoff Details</h4>
     <ul>
         <li>Volunteer cost: {{ C.VOLUNTEER_COST }}</li>
         <li>General benefit if at least one volunteers: {{ C.GENERAL_BENEFIT }}</li>
         <li>If no one volunteers: {{ C.NO_VOLUNTEER_PAYOFF }}</li>
     </ul>
+    {{ formfields }}
+    {{ next_button }}
 {% endblock %}

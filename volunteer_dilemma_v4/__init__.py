@@ -2,18 +2,18 @@ from otree.api import *
 import random
 
 doc = """
-Volunteer's dilemma, 3 rounds, random balances (60-100), group income reveal, altruistic version.
+Volunteer's dilemma, ALTRUISM: ON, RANDOM BALANCES: ON.
 """
 
 class C(BaseConstants):
     NAME_IN_URL = 'volunteer_dilemma_v4'
     PLAYERS_PER_GROUP = 4
     NUM_OTHER_PLAYERS = PLAYERS_PER_GROUP - 1
-    GENERAL_BENEFIT = cu(10)
-    VOLUNTEER_COST = cu(10)  # altruism: cost = benefit
+    GENERAL_BENEFIT = cu(5)
+    VOLUNTEER_COST = cu(7)  # altruism: cost = benefit
     NO_VOLUNTEER_PAYOFF = cu(-2)
-    BALANCE_LOW = 60
-    BALANCE_HIGH = 100
+    BALANCE_LOW = 30
+    BALANCE_HIGH = 70 # random balances
     NUM_ROUNDS = 1
 
 class Subsession(BaseSubsession):
@@ -37,8 +37,25 @@ class Player(BasePlayer):
     )
 
 def initialize_balance(player: Player):
-    player.balance = random.randint(C.BALANCE_LOW, C.BALANCE_HIGH)
-
+    player.balance = random.randint(BALANCE_LOW, BALANCE_HIGH)
+  # dict(
+    #     name='vd_v1',
+    #     display_name="Modified version of Volunteer's Dilemma by AHRSS - v1",
+    #     app_sequence=['volunteer_dilemma_v1'],
+    #     num_demo_participants=20,
+    # ),
+    # dict(
+    #     name='vd_v2',
+    #     display_name="Modified version of Volunteer's Dilemma by AHRSS - v2",
+    #     app_sequence=['volunteer_dilemma_v2'],
+    #     num_demo_participants=8,
+    # ),
+    # dict(
+    #     name='vd_v3',
+    #     display_name="Modified version of Volunteer's Dilemma by AHRSS - v3",
+    #     app_sequence=['volunteer_dilemma_v3'],
+    #     num_demo_participants=4,
+    # ),
 def set_initial_min_max_balance(group: Group):
     players = group.get_players()
     min_balance = min([p.balance for p in players])

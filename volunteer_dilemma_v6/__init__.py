@@ -2,18 +2,18 @@ from otree.api import *
 import random
 
 doc = """
-Volunteer's dilemma, 3 rounds, random balances (60-100), group income reveal, standard (not altruistic) version.
+Volunteer's dilemma, ALTRUISM: OFF, RANDOM BALANCES: ON.
 """
 
 class C(BaseConstants):
     NAME_IN_URL = 'volunteer_dilemma_v6'
     PLAYERS_PER_GROUP = 4
     NUM_OTHER_PLAYERS = PLAYERS_PER_GROUP - 1
-    GENERAL_BENEFIT = cu(10)
-    VOLUNTEER_COST = cu(5)  # standard: cost < benefit
+    GENERAL_BENEFIT = cu(5)
+    VOLUNTEER_COST = cu(3)  # altruism: cost = benefit
     NO_VOLUNTEER_PAYOFF = cu(-2)
-    BALANCE_LOW = 60
-    BALANCE_HIGH = 100
+    BALANCE_LOW = 30
+    BALANCE_HIGH = 70 # random balances
     NUM_ROUNDS = 1
 
 class Subsession(BaseSubsession):
@@ -37,7 +37,7 @@ class Player(BasePlayer):
     )
 
 def initialize_balance(player: Player):
-    player.balance = random.randint(C.BALANCE_LOW, C.BALANCE_HIGH)
+    player.balance = random.randint(BALANCE_LOW, BALANCE_HIGH)
 
 def set_initial_min_max_balance(group: Group):
     players = group.get_players()

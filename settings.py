@@ -2,55 +2,50 @@ from os import environ
 
 
 SESSION_CONFIGS = [
-    dict(
-        name='vd_v1',
-        display_name="Modified version of Volunteer's Dilemma by AHRSS - v1",
-        app_sequence=['volunteer_dilemma_v1'],
-        num_demo_participants=20,
-    ),
-    dict(
-        name='vd_v2',
-        display_name="Modified version of Volunteer's Dilemma by AHRSS - v2",
-        app_sequence=['volunteer_dilemma_v2'],
-        num_demo_participants=8,
-    ),
-    dict(
-        name='vd_v3',
-        display_name="Modified version of Volunteer's Dilemma by AHRSS - v3",
-        app_sequence=['volunteer_dilemma_v3'],
-        num_demo_participants=4,
-    ),
+    # dict(
+    #     name='vd_v1',
+    #     display_name="Modified version of Volunteer's Dilemma by AHRSS - v1",
+    #     app_sequence=['volunteer_dilemma_v1'],
+    #     num_demo_participants=20,
+    # ),
+    # dict(
+    #     name='vd_v2',
+    #     display_name="Modified version of Volunteer's Dilemma by AHRSS - v2",
+    #     app_sequence=['volunteer_dilemma_v2'],
+    #     num_demo_participants=8,
+    # ),
+    # dict(
+    #     name='vd_v3',
+    #     display_name="Modified version of Volunteer's Dilemma by AHRSS - v3",
+    #     app_sequence=['volunteer_dilemma_v3'],
+    #     num_demo_participants=4,
+    # ),
     dict(
         name='volunteer_dilemma_v4',
-        display_name='Experimental Economics Experiment 1 (Altruism: ON, Income Reveal: ON)',
+        display_name='Experimental Economics Experiment 1 (Altruism: ON, Random Balances: ON)',
         app_sequence=['volunteer_dilemma_v4'],
         num_demo_participants=4,
-        altruism=True,
-        income_reveal=True,
+ 
     ),
     dict(
         name='volunteer_dilemma_v5',
-        display_name='Experimental Economics Experiment 2 (Altruism: ON, Income Reveal: OFF)',
+        display_name='Experimental Economics Experiment 2 (Altruism: ON, Random Balances: OFF)',
         app_sequence=['volunteer_dilemma_v5'],
         num_demo_participants=4,
-        altruism=True,
-        income_reveal=False,
+     
     ),
     dict(
         name='volunteer_dilemma_v6',
-        display_name='Experimental Economics Experiment 3 (Altruism: OFF, Income Reveal: ON)',
+        display_name='Experimental Economics Experiment 3 (Altruism: OFF, Random Balances: ON)',
         app_sequence=['volunteer_dilemma_v6'],
         num_demo_participants=4,
-        altruism=False,
-        income_reveal=True,
     ),
     dict(
         name='volunteer_dilemma_v7',
-        display_name='Experimental Economics Experiment 4 (Altruism: OFF, Income Reveal: OFF)',
+        display_name='Experimental Economics Experiment 4 (Altruism: OFF, Random Balances: OFF)',
         app_sequence=['volunteer_dilemma_v7'],
         num_demo_participants=4,
-        altruism=False,
-        income_reveal=False,
+    
     ),
 ]
 
