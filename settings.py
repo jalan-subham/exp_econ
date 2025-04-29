@@ -83,6 +83,8 @@ ADMIN_USERNAME = 'admin'
 ADMIN_PASSWORD = environ.get('OTREE_ADMIN_PASSWORD')
 
 DEMO_PAGE_INTRO_HTML = """
+This oTree project was made by Arman, Hemant, Ronit, Shruti, and Subham.
+It is a variation of the <b>Volunteer's Dilemma</b> game, with altruistic and random balances controls.
 """
 
 
