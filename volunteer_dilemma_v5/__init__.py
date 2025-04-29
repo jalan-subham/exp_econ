@@ -7,7 +7,7 @@ Volunteer's dilemma, ALTRUISM: ON, RANDOM BALANCES: OFF.
 
 class C(BaseConstants):
     NAME_IN_URL = 'volunteer_dilemma_v5'
-    PLAYERS_PER_GROUP = 4
+    PLAYERS_PER_GROUP = 2
     NUM_OTHER_PLAYERS = PLAYERS_PER_GROUP - 1
     GENERAL_BENEFIT = cu(5)
     VOLUNTEER_COST = cu(7)  # altruism: cost = benefit
@@ -37,7 +37,7 @@ class Player(BasePlayer):
     )
 
 def initialize_balance(player: Player):
-    player.balance = random.randint(BALANCE_LOW, BALANCE_HIGH)
+    player.balance = random.randint(C.BALANCE_LOW, C.BALANCE_HIGH)
 
 def set_initial_min_max_balance(group: Group):
     players = group.get_players()

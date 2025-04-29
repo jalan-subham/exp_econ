@@ -24,27 +24,27 @@ SESSION_CONFIGS = [
         name='volunteer_dilemma_v4',
         display_name='Experimental Economics Experiment 1 (Altruism: ON, Random Balances: ON)',
         app_sequence=['volunteer_dilemma_v4'],
-        num_demo_participants=4,
+        num_demo_participants=2,
  
     ),
     dict(
         name='volunteer_dilemma_v5',
         display_name='Experimental Economics Experiment 2 (Altruism: ON, Random Balances: OFF)',
         app_sequence=['volunteer_dilemma_v5'],
-        num_demo_participants=4,
+        num_demo_participants=2,
      
     ),
     dict(
         name='volunteer_dilemma_v6',
         display_name='Experimental Economics Experiment 3 (Altruism: OFF, Random Balances: ON)',
         app_sequence=['volunteer_dilemma_v6'],
-        num_demo_participants=4,
+        num_demo_participants=2,
     ),
     dict(
         name='volunteer_dilemma_v7',
         display_name='Experimental Economics Experiment 4 (Altruism: OFF, Random Balances: OFF)',
         app_sequence=['volunteer_dilemma_v7'],
-        num_demo_participants=4,
+        num_demo_participants=2,
     
     ),
 ]
