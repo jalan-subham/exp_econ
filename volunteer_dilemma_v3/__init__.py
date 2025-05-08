@@ -2,26 +2,28 @@ from otree.api import *
 import random
 
 doc = """
-Volunteer's dilemma, ALTRUISM: ON, RANDOM BALANCES: OFF.
+Volunteer's dilemma, ALTRUISM: OFF, RANDOM BALANCES: ON.
 """
 
 class C(BaseConstants):
-    NAME_IN_URL = 'volunteer_dilemma_v5'
-    PLAYERS_PER_GROUP = 5
+    NAME_IN_URL = "VolunteerDilemma-3"
+    PLAYERS_PER_GROUP = 3
     NUM_OTHER_PLAYERS = PLAYERS_PER_GROUP - 1
     GENERAL_BENEFIT = cu(5)
-    VOLUNTEER_COST = cu(7)  # altruism: cost = benefit
+    VOLUNTEER_COST = cu(3)  # altruism: cost = benefit
     NO_VOLUNTEER_PAYOFF = cu(-2)
     BALANCE_LOW = 50
-    BALANCE_HIGH = 50 # fixed balances
+    BALANCE_HIGH = 100 # random balances
     # We could not get NUM_ROUNDS to work while persisting the computed variables, so we hardcoded the page sequence
     NUM_ROUNDS = 1 # number of rounds
 
 class Subsession(BaseSubsession):
+    round_index = models.IntegerField(initial=1) # round index for the current round
     pass
 
 class Group(BaseGroup):
     num_volunteers = models.IntegerField()
+  
 
 class Player(BasePlayer):
     volunteer = models.BooleanField(
@@ -36,7 +38,7 @@ class Player(BasePlayer):
     )
 
 def initialize_balance(player: Player):
-    player.balance = random.randint(BALANCE_LOW, BALANCE_HIGH)
+    player.balance = random.randint(C.BALANCE_LOW, C.BALANCE_HIGH)
 
 def set_payoffs_and_balances(group: Group):
     players = group.get_players()
@@ -51,7 +53,8 @@ def set_payoffs_and_balances(group: Group):
             p.payoff -= C.VOLUNTEER_COST
     for p in players:
         p.balance += p.payoff
-
+    group.subsession.round_index += 1
+    
 
 class Introduction(Page):
     form_model = 'player'
@@ -66,6 +69,7 @@ class Decision(Page):
         group_incomes = sorted([p.balance for p in player.group.get_players()])
         return {
             "group_incomes": ', '.join([str(x) for x in group_incomes]),
+            "round_index": player.subsession.round_index,
         }
 
 class InitWaitPage(WaitPage):

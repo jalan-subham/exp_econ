@@ -1,15 +1,20 @@
 {% extends "global/Page.html" %}
+
 {% block content %}
-    <h3>Decision</h3>
+<h3>Payoff Details</h3>
+<ul>
+    <li>Volunteer cost: {{ C.VOLUNTEER_COST }}</li>
+    <li>General benefit if at least one volunteers: {{ C.GENERAL_BENEFIT }}</li>
+    <li>If no one volunteers: {{ C.NO_VOLUNTEER_PAYOFF }}</li>
+</ul>
+
+    <h4>Decision (Round {{ round_index }})</h4>
     <p>Do you wish to volunteer? If at least one person volunteers, everyone benefits. If no one volunteers, all lose out.</p>
     <p>Group incomes: {{ group_incomes }}</p>
     <p>Your balance: {{ player.balance }}</p>
-    <h4>Payoff Details</h4>
-    <ul>
-        <li>Volunteer cost: {{ C.VOLUNTEER_COST }}</li>
-        <li>General benefit if at least one volunteers: {{ C.GENERAL_BENEFIT }}</li>
-        <li>If no one volunteers: {{ C.NO_VOLUNTEER_PAYOFF }}</li>
-    </ul>
+   
     {{ formfields }}
     {{ next_button }}
+
+
 {% endblock %}

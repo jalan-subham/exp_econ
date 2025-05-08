@@ -2,15 +2,15 @@ from otree.api import *
 import random
 
 doc = """
-Volunteer's dilemma, ALTRUISM: OFF, RANDOM BALANCES: OFF.
+Volunteer's dilemma, ALTRUISM: ON, RANDOM BALANCES: OFF.
 """
 
 class C(BaseConstants):
-    NAME_IN_URL = 'volunteer_dilemma_v7'
-    PLAYERS_PER_GROUP = 5 # how many players per group? this variable can be changed.
+    NAME_IN_URL = "VolunteerDilemma-2"
+    PLAYERS_PER_GROUP = 3
     NUM_OTHER_PLAYERS = PLAYERS_PER_GROUP - 1
     GENERAL_BENEFIT = cu(5)
-    VOLUNTEER_COST = cu(3)  # altruism: cost = benefit
+    VOLUNTEER_COST = cu(7)  # altruism: cost = benefit
     NO_VOLUNTEER_PAYOFF = cu(-2)
     BALANCE_LOW = 50
     BALANCE_HIGH = 50 # fixed balances
@@ -18,6 +18,7 @@ class C(BaseConstants):
     NUM_ROUNDS = 1 # number of rounds
 
 class Subsession(BaseSubsession):
+    round_index = models.IntegerField(initial=1) # round index for the current round
     pass
 
 class Group(BaseGroup):
@@ -51,6 +52,8 @@ def set_payoffs_and_balances(group: Group):
             p.payoff -= C.VOLUNTEER_COST
     for p in players:
         p.balance += p.payoff
+    group.subsession.round_index += 1
+
 
 class Introduction(Page):
     form_model = 'player'
@@ -65,6 +68,7 @@ class Decision(Page):
         group_incomes = sorted([p.balance for p in player.group.get_players()])
         return {
             "group_incomes": ', '.join([str(x) for x in group_incomes]),
+            "round_index": player.subsession.round_index,
         }
 
 class InitWaitPage(WaitPage):

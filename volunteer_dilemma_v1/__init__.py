@@ -2,29 +2,30 @@ from otree.api import *
 import random
 
 doc = """
-Volunteer's dilemma, ALTRUISM: OFF, RANDOM BALANCES: ON.
+Volunteer's dilemma, ALTRUISM: ON, RANDOM BALANCES: ON.
 """
 
 class C(BaseConstants):
-    NAME_IN_URL = 'volunteer_dilemma_v6'
-    PLAYERS_PER_GROUP = 5
+    NAME_IN_URL = "VolunteerDilemma-1"
+    PLAYERS_PER_GROUP = 3 # how many players per group? this variable can be changed.
     NUM_OTHER_PLAYERS = PLAYERS_PER_GROUP - 1
-    GENERAL_BENEFIT = cu(5)
-    VOLUNTEER_COST = cu(3)  # altruism: cost = benefit
+    GENERAL_BENEFIT = cu(5) # general benefit for all players
+    VOLUNTEER_COST = cu(7)  # altruism: cost > benefit
     NO_VOLUNTEER_PAYOFF = cu(-2)
     BALANCE_LOW = 50
     BALANCE_HIGH = 100 # random balances
     # We could not get NUM_ROUNDS to work while persisting the computed variables, so we hardcoded the page sequence
     NUM_ROUNDS = 1 # number of rounds
+    
 
 class Subsession(BaseSubsession):
-    pass
+    round_index = models.IntegerField(initial=1) # round index for the current round
+    
 
-class Group(BaseGroup):
+class Group(BaseGroup): # group model/table
     num_volunteers = models.IntegerField()
-  
 
-class Player(BasePlayer):
+class Player(BasePlayer): # player model/table
     volunteer = models.BooleanField(
         label='Do you wish to volunteer?', doc="""Whether player volunteers"""
     )
@@ -36,10 +37,10 @@ class Player(BasePlayer):
         doc="""The player's balance after the round"""
     )
 
-def initialize_balance(player: Player):
-    player.balance = random.randint(BALANCE_LOW, BALANCE_HIGH)
+def initialize_balance(player: Player): # initialize the random balance of the player
+    player.balance = random.randint(C.BALANCE_LOW, C.BALANCE_HIGH)
 
-def set_payoffs_and_balances(group: Group):
+def set_payoffs_and_balances(group: Group): # set the payoffs and balances of the players
     players = group.get_players()
     group.num_volunteers = sum([p.volunteer for p in players])
     if group.num_volunteers > 0:
@@ -52,32 +53,35 @@ def set_payoffs_and_balances(group: Group):
             p.payoff -= C.VOLUNTEER_COST
     for p in players:
         p.balance += p.payoff
+    group.subsession.round_index += 1
+    
 
-class Introduction(Page):
+class Introduction(Page): # introduction page
     form_model = 'player'
     form_fields = ['name']
     def before_next_page(player, timeout_happened):
         initialize_balance(player)
 
-class Decision(Page):
+class Decision(Page): # decision page
     form_model = 'player'
     form_fields = ['volunteer']
     def vars_for_template(player):
         group_incomes = sorted([p.balance for p in player.group.get_players()])
         return {
             "group_incomes": ', '.join([str(x) for x in group_incomes]),
+            "round_index": player.subsession.round_index,
         }
 
-class InitWaitPage(WaitPage):
+class InitWaitPage(WaitPage): # wait page for initialization
     def before_next_page(player, timeout_happened):
         initialize_balance(player)
 
-class ResultsWaitPage(WaitPage):
+class ResultsWaitPage(WaitPage): # wait page for results
     after_all_players_arrive = set_payoffs_and_balances
 
-class Results(Page):
+class Results(Page): # results page (predefined)
     pass
-class ThankYou(Page):
+class ThankYou(Page): # thank you page
     pass
 
 page_sequence = [

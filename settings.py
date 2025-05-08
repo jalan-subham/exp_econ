@@ -23,30 +23,30 @@ SESSION_CONFIGS = [
     #     num_demo_participants=4,
     # ),
     dict(
-        name='volunteer_dilemma_v4',
+        name='volunteer_dilemma_v1',
         display_name='Experimental Economics Experiment 1 (Altruism: ON, Random Balances: ON)',
-        app_sequence=['volunteer_dilemma_v4'],
-        num_demo_participants=5,
+        app_sequence=['volunteer_dilemma_v1'],
+        num_demo_participants=3,
  
     ),
     dict(
-        name='volunteer_dilemma_v5',
+        name='volunteer_dilemma_v2',
         display_name='Experimental Economics Experiment 2 (Altruism: ON, Random Balances: OFF)',
-        app_sequence=['volunteer_dilemma_v5'],
-        num_demo_participants=5,
+        app_sequence=['volunteer_dilemma_v2'],
+        num_demo_participants=3,
      
     ),
     dict(
-        name='volunteer_dilemma_v6',
+        name='volunteer_dilemma_v3',
         display_name='Experimental Economics Experiment 3 (Altruism: OFF, Random Balances: ON)',
-        app_sequence=['volunteer_dilemma_v6'],
-        num_demo_participants=5,
+        app_sequence=['volunteer_dilemma_v3'],
+        num_demo_participants=3,
     ),
     dict(
-        name='volunteer_dilemma_v7',
+        name='volunteer_dilemma_v4',
         display_name='Experimental Economics Experiment 4 (Altruism: OFF, Random Balances: OFF)',
-        app_sequence=['volunteer_dilemma_v7'],
-        num_demo_participants=5,
+        app_sequence=['volunteer_dilemma_v4'],
+        num_demo_participants=3,
     
     ),
 ]
