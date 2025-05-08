@@ -17,8 +17,8 @@ Go to the website link (might take some time to load for the first time) and pla
 
 Or, you can clone this repository and run 
 + `python3 -m venv .venv`
-+ `pip install -r requirements.txt`
 + `source .venv/bin/activate`
++ `pip install -r requirements.txt`
 + `otree devserver`
 
 This runs in DEBUG mode without AUTHENTICATION.
