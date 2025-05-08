@@ -7,7 +7,7 @@ We have 4 games with 2 control variables - Altruism and Income Reveal. This is d
 
 ## Comments
 
-The file [volunteer_dilemma_v4/__init__.py](volunteer_dilemma_v4/__init__.py) has been commented well. Other files are derived from this, so understanding this file should be enough.
+The file [volunteer_dilemma_v1/__init__.py](volunteer_dilemma_v4/__init__.py) has been commented well. Other files are derived from this, so understanding this file should be enough.
 
 Commenting the Jinja2 templates is not required because of their trivial nature.
 
