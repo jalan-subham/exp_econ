@@ -25,13 +25,13 @@ Or, you can clone this repository and run
 This runs in DEBUG mode without AUTHENTICATION.
 
 ## Running the Demo
-You can click on any game to start the demo. If your hands are tired and you don't want to play as 5 participants at once, you can decrease the Group Size in the `volunteer_dilemma_v[4-7]/__init__.py` files and [settings.py](settings.py).
+We have currently set the Group Size to 3 (so you can test out the demo without having to open 5 tabs at once). In the presentation, we presented the group size being equal to 5. If you wish to make this change, modify `volunteer_dilemma_v[1-4]/__init__.py` and [settings.py](settings.py).
 
 ### Folder Structure
 - Don't touch any folders beginning with `_`.
 - Don't delete `requirements.txt`.
 - `archive/` contains some old versions of the game.
-- All the main code files are in `volunteer_dilemma_v[4-7]`
+- All the main code files are in `volunteer_dilemma_v[1-4]`
 
 ### Admin Creds
 
