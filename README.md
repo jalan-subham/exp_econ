@@ -9,11 +9,11 @@ We have 4 games with 2 control variables - Altruism and Income Reveal. This is d
 
 The file [volunteer_dilemma_v4/__init__.py](volunteer_dilemma_v4/__init__.py) has been commented well. Other files are derived from this, so understanding this file should be enough.
 
-Commenting the Jinja2 templates is not required because of its trivial nature.
+Commenting the Jinja2 templates is not required because of their trivial nature.
 
 ### How to use?
 Go to the website link (might take some time to load for the first time) and play a demo. This runs in PRODUCTION mode with AUTHENTICATION.
-[Website](exp-econ.onrender.com)
+[Website](https://exp-econ.onrender.com)
 
 Or, you can clone this repository and run 
 + `python3 -m venv .venv`
