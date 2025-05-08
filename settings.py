@@ -1,5 +1,7 @@
 from os import environ
 
+# i commented the old ones because they were not needed
+
 
 SESSION_CONFIGS = [
     # dict(
@@ -24,27 +26,27 @@ SESSION_CONFIGS = [
         name='volunteer_dilemma_v4',
         display_name='Experimental Economics Experiment 1 (Altruism: ON, Random Balances: ON)',
         app_sequence=['volunteer_dilemma_v4'],
-        num_demo_participants=2,
+        num_demo_participants=5,
  
     ),
     dict(
         name='volunteer_dilemma_v5',
         display_name='Experimental Economics Experiment 2 (Altruism: ON, Random Balances: OFF)',
         app_sequence=['volunteer_dilemma_v5'],
-        num_demo_participants=2,
+        num_demo_participants=5,
      
     ),
     dict(
         name='volunteer_dilemma_v6',
         display_name='Experimental Economics Experiment 3 (Altruism: OFF, Random Balances: ON)',
         app_sequence=['volunteer_dilemma_v6'],
-        num_demo_participants=2,
+        num_demo_participants=5,
     ),
     dict(
         name='volunteer_dilemma_v7',
         display_name='Experimental Economics Experiment 4 (Altruism: OFF, Random Balances: OFF)',
         app_sequence=['volunteer_dilemma_v7'],
-        num_demo_participants=2,
+        num_demo_participants=5,
     
     ),
 ]
@@ -66,7 +68,7 @@ SESSION_FIELDS = []
 LANGUAGE_CODE = 'en'
 
 # e.g. EUR, GBP, CNY, JPY
-REAL_WORLD_CURRENCY_CODE = 'INR'
+REAL_WORLD_CURRENCY_CODE = 'INR' # HAW!
 USE_POINTS = True
 
 ROOMS = [
@@ -88,6 +90,6 @@ It is a variation of the <b>Volunteer's Dilemma</b> game, with altruistic and ra
 """
 
 
-SECRET_KEY = '7002691907422'
+SECRET_KEY = '7002691907422' # dont reveal this to anyone, or I will cry
 
 INSTALLED_APPS = ['otree']

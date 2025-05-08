@@ -7,22 +7,22 @@ Volunteer's dilemma, ALTRUISM: OFF, RANDOM BALANCES: ON.
 
 class C(BaseConstants):
     NAME_IN_URL = 'volunteer_dilemma_v6'
-    PLAYERS_PER_GROUP = 2
+    PLAYERS_PER_GROUP = 5
     NUM_OTHER_PLAYERS = PLAYERS_PER_GROUP - 1
     GENERAL_BENEFIT = cu(5)
     VOLUNTEER_COST = cu(3)  # altruism: cost = benefit
     NO_VOLUNTEER_PAYOFF = cu(-2)
     BALANCE_LOW = 50
     BALANCE_HIGH = 100 # random balances
-    NUM_ROUNDS = 1
+    # We could not get NUM_ROUNDS to work while persisting the computed variables, so we hardcoded the page sequence
+    NUM_ROUNDS = 1 # number of rounds
 
 class Subsession(BaseSubsession):
     pass
 
 class Group(BaseGroup):
     num_volunteers = models.IntegerField()
-    min_balance = models.CurrencyField()
-    max_balance = models.CurrencyField()
+  
 
 class Player(BasePlayer):
     volunteer = models.BooleanField(
@@ -37,14 +37,7 @@ class Player(BasePlayer):
     )
 
 def initialize_balance(player: Player):
-    player.balance = random.randint(C.BALANCE_LOW, C.BALANCE_HIGH)
-
-def set_initial_min_max_balance(group: Group):
-    players = group.get_players()
-    min_balance = min([p.balance for p in players])
-    max_balance = max([p.balance for p in players])
-    group.min_balance = min_balance
-    group.max_balance = max_balance
+    player.balance = random.randint(BALANCE_LOW, BALANCE_HIGH)
 
 def set_payoffs_and_balances(group: Group):
     players = group.get_players()
@@ -59,10 +52,6 @@ def set_payoffs_and_balances(group: Group):
             p.payoff -= C.VOLUNTEER_COST
     for p in players:
         p.balance += p.payoff
-    min_balance = min([p.balance for p in players])
-    max_balance = max([p.balance for p in players])
-    group.min_balance = min_balance
-    group.max_balance = max_balance
 
 class Introduction(Page):
     form_model = 'player'
@@ -80,7 +69,6 @@ class Decision(Page):
         }
 
 class InitWaitPage(WaitPage):
-    after_all_players_arrive = set_initial_min_max_balance
     def before_next_page(player, timeout_happened):
         initialize_balance(player)
 

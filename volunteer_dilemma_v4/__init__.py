@@ -7,24 +7,23 @@ Volunteer's dilemma, ALTRUISM: ON, RANDOM BALANCES: ON.
 
 class C(BaseConstants):
     NAME_IN_URL = 'volunteer_dilemma_v4'
-    PLAYERS_PER_GROUP = 2
+    PLAYERS_PER_GROUP = 5 # how many players per group? this variable can be changed.
     NUM_OTHER_PLAYERS = PLAYERS_PER_GROUP - 1
-    GENERAL_BENEFIT = cu(5)
-    VOLUNTEER_COST = cu(7)  # altruism: cost = benefit
+    GENERAL_BENEFIT = cu(5) # general benefit for all players
+    VOLUNTEER_COST = cu(7)  # altruism: cost > benefit
     NO_VOLUNTEER_PAYOFF = cu(-2)
     BALANCE_LOW = 50
     BALANCE_HIGH = 100 # random balances
-    NUM_ROUNDS = 1
+    # We could not get NUM_ROUNDS to work while persisting the computed variables, so we hardcoded the page sequence
+    NUM_ROUNDS = 1 # number of rounds
 
 class Subsession(BaseSubsession):
     pass
 
-class Group(BaseGroup):
+class Group(BaseGroup): # group model/table
     num_volunteers = models.IntegerField()
-    min_balance = models.CurrencyField()
-    max_balance = models.CurrencyField()
 
-class Player(BasePlayer):
+class Player(BasePlayer): # player model/table
     volunteer = models.BooleanField(
         label='Do you wish to volunteer?', doc="""Whether player volunteers"""
     )
@@ -36,34 +35,10 @@ class Player(BasePlayer):
         doc="""The player's balance after the round"""
     )
 
-def initialize_balance(player: Player):
+def initialize_balance(player: Player): # initialize the random balance of the player
     player.balance = random.randint(C.BALANCE_LOW, C.BALANCE_HIGH)
-  # dict(
-    #     name='vd_v1',
-    #     display_name="Modified version of Volunteer's Dilemma by AHRSS - v1",
-    #     app_sequence=['volunteer_dilemma_v1'],
-    #     num_demo_participants=20,
-    # ),
-    # dict(
-    #     name='vd_v2',
-    #     display_name="Modified version of Volunteer's Dilemma by AHRSS - v2",
-    #     app_sequence=['volunteer_dilemma_v2'],
-    #     num_demo_participants=8,
-    # ),
-    # dict(
-    #     name='vd_v3',
-    #     display_name="Modified version of Volunteer's Dilemma by AHRSS - v3",
-    #     app_sequence=['volunteer_dilemma_v3'],
-    #     num_demo_participants=4,
-    # ),
-def set_initial_min_max_balance(group: Group):
-    players = group.get_players()
-    min_balance = min([p.balance for p in players])
-    max_balance = max([p.balance for p in players])
-    group.min_balance = min_balance
-    group.max_balance = max_balance
 
-def set_payoffs_and_balances(group: Group):
+def set_payoffs_and_balances(group: Group): # set the payoffs and balances of the players
     players = group.get_players()
     group.num_volunteers = sum([p.volunteer for p in players])
     if group.num_volunteers > 0:
@@ -76,18 +51,14 @@ def set_payoffs_and_balances(group: Group):
             p.payoff -= C.VOLUNTEER_COST
     for p in players:
         p.balance += p.payoff
-    min_balance = min([p.balance for p in players])
-    max_balance = max([p.balance for p in players])
-    group.min_balance = min_balance
-    group.max_balance = max_balance
 
-class Introduction(Page):
+class Introduction(Page): # introduction page
     form_model = 'player'
     form_fields = ['name']
     def before_next_page(player, timeout_happened):
         initialize_balance(player)
 
-class Decision(Page):
+class Decision(Page): # decision page
     form_model = 'player'
     form_fields = ['volunteer']
     def vars_for_template(player):
@@ -96,17 +67,16 @@ class Decision(Page):
             "group_incomes": ', '.join([str(x) for x in group_incomes]),
         }
 
-class InitWaitPage(WaitPage):
-    after_all_players_arrive = set_initial_min_max_balance
+class InitWaitPage(WaitPage): # wait page for initialization
     def before_next_page(player, timeout_happened):
         initialize_balance(player)
 
-class ResultsWaitPage(WaitPage):
+class ResultsWaitPage(WaitPage): # wait page for results
     after_all_players_arrive = set_payoffs_and_balances
 
-class Results(Page):
+class Results(Page): # results page (predefined)
     pass
-class ThankYou(Page):
+class ThankYou(Page): # thank you page
     pass
 
 page_sequence = [
