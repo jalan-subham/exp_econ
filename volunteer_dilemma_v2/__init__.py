@@ -24,22 +24,44 @@ class Subsession(BaseSubsession):
 class Group(BaseGroup):
     num_volunteers = models.IntegerField()
 
-class Player(BasePlayer):
+class Player(BasePlayer): # player model/table
     volunteer = models.BooleanField(
         label='Do you wish to volunteer?', doc="""Whether player volunteers"""
     )
     name = models.StringField(
         label='Enter your name', doc="""Name of the player"""
     )
+    initial_balance = models.CurrencyField(
+        label='Initial Balance')
+    
     balance = models.CurrencyField(
         label='Balance',
         doc="""The player's balance after the round"""
+        
+    )
+    round1_volunteer = models.BooleanField(
+        doc ="""Whether player volunteered in round 1""")
+    balance1 = models.CurrencyField(
+        label='Balance',
+        doc="""The player's balance after round 1"""
+    )
+    round2_volunteer = models.BooleanField(
+        doc ="""Whether player volunteered in round 2""")
+    balance2 = models.CurrencyField(
+        label='Balance',
+        doc="""The player's balance after round 2"""
+    )
+    round3_volunteer = models.BooleanField(
+        doc ="""Whether player volunteered in round 3""")
+    balance3 = models.CurrencyField(
+        label='Balance',
+        doc="""The player's balance after round 3"""
     )
 
 def initialize_balance(player: Player):
     player.balance = random.randint(C.BALANCE_LOW, C.BALANCE_HIGH)
 
-def set_payoffs_and_balances(group: Group):
+def set_payoffs_and_balances(group: Group): # set the payoffs and balances of the players
     players = group.get_players()
     group.num_volunteers = sum([p.volunteer for p in players])
     if group.num_volunteers > 0:
@@ -50,10 +72,19 @@ def set_payoffs_and_balances(group: Group):
         p.payoff = baseline_amount
         if p.volunteer:
             p.payoff -= C.VOLUNTEER_COST
-    for p in players:
+        # Update the balance and round-specific fields
         p.balance += p.payoff
+        round_index = group.subsession.round_index
+        if round_index == 1:
+            p.round1_volunteer = p.volunteer
+            p.balance1 = p.balance
+        elif round_index == 2:
+            p.round2_volunteer = p.volunteer
+            p.balance2 = p.balance
+        elif round_index == 3:
+            p.round3_volunteer = p.volunteer
+            p.balance3 = p.balance
     group.subsession.round_index += 1
-
 
 class Introduction(Page):
     form_model = 'player'
