@@ -12,7 +12,8 @@ The file [volunteer_dilemma_v4/__init__.py](volunteer_dilemma_v4/__init__.py) ha
 Commenting the Jinja2 templates is not required because of their trivial nature.
 
 ### How to use?
-Go to the website link (might take some time to load for the first time) and play a demo. This runs in PRODUCTION mode with AUTHENTICATION.
+Go to the website link (might take some time to load for the first time) and play a demo. This runs in PRODUCTION mode with AUTHENTICATION. In the online version, the atabase is not persistent, so after doing some data collection, be sure to download the `.csv` right away!
+
 [Website](https://exp-econ.onrender.com)
 
 Or, you can clone this repository and run 
@@ -22,7 +23,6 @@ Or, you can clone this repository and run
 + `otree devserver`
 
 This runs in DEBUG mode without AUTHENTICATION.
-Database is not persistent, so after doing some data collection, be sure to download the `.csv` right away!
 
 ## Running the Demo
 You can click on any game to start the demo. If your hands are tired and you don't want to play as 5 participants at once, you can decrease the Group Size in the `volunteer_dilemma_v[4-7]/__init__.py` files and [settings.py](settings.py).
